@@ -44,7 +44,7 @@ module.exports = {
       }
     },
     {
-      resolve: "gatsby-plugin-feed",
+      resolve: "gatsby-plugin-feed-mdx",
       options: {
         query: `
           {
@@ -59,14 +59,14 @@ module.exports = {
         `,
         feeds: [
           {
-            serialize: ({ query: { site, allMarkdownRemark } }) =>
-              allMarkdownRemark.edges.map(edge => ({
+            serialize: ({ query: { site, allMdx } }) =>
+              allMdx.edges.map(edge => ({
                 ...edge.node.frontmatter,
                 description: edge.node.frontmatter.description,
                 date: edge.node.frontmatter.date,
                 url: site.siteMetadata.site_url + edge.node.fields.slug,
                 guid: site.siteMetadata.site_url + edge.node.fields.slug,
-                custom_elements: [{ "content:encoded": edge.node.html }]
+                custom_elements: [{ "content:encoded": edge.node.body }]
               })),
             query: `
               {
@@ -77,7 +77,7 @@ module.exports = {
                 ) {
                   edges {
                     node {
-                      html
+                      body
                       fields {
                         slug
                       }
@@ -100,9 +100,10 @@ module.exports = {
       }
     },
     {
-      resolve: "gatsby-transformer-remark",
+      resolve: `gatsby-plugin-mdx`,
       options: {
-        plugins: [
+        extensions: [`.mdx`, `.md`],
+        gatsbyRemarkPlugins: [
           "gatsby-remark-relative-images",
           {
             resolve: "gatsby-remark-katex",

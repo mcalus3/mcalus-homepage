@@ -4,22 +4,20 @@ import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import Post from "../components/Post";
 import { useSiteMetadata } from "../hooks";
-import type { MarkdownRemark } from "../types";
+import type { Mdx } from "../types";
+import { MDXRenderer } from "gatsby-plugin-mdx";
 
 type Props = {
   data: {
-    markdownRemark: MarkdownRemark
+    mdx: Mdx
   }
 };
 
 const PostTemplate = ({ data }: Props) => {
   const { title: siteTitle, subtitle: siteSubtitle } = useSiteMetadata();
-  const { frontmatter } = data.markdownRemark;
   const {
-    title: postTitle,
-    description: postDescription,
-    socialImage
-  } = frontmatter;
+    frontmatter: { title: postTitle, description: postDescription, socialImage }
+  } = data.mdx;
   const metaDescription =
     postDescription !== null ? postDescription : siteSubtitle;
 
@@ -29,16 +27,16 @@ const PostTemplate = ({ data }: Props) => {
       description={metaDescription}
       socialImage={socialImage}
     >
-      <Post post={data.markdownRemark} />
+      <Post post={data.mdx} />
     </Layout>
   );
 };
 
 export const query = graphql`
   query PostBySlug($slug: String!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+    mdx(fields: { slug: { eq: $slug } }) {
       id
-      html
+      body
       fields {
         slug
         tagSlugs
