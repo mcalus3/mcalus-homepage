@@ -6,6 +6,7 @@ import Sidebar from "../components/Sidebar";
 import Page from "../components/Page";
 import { useSiteMetadata } from "../hooks";
 import type { Mdx } from "../types";
+import { MDXRenderer } from "gatsby-plugin-mdx";
 
 type Props = {
   data: {
@@ -38,7 +39,7 @@ const PageTemplate = ({ data }: Props) => {
 
 export const query = graphql`
   query PageBySlug($slug: String!) {
-    mdx(frontmatter: { slug: { eq: $slug } }) {
+    mdx(fields: { slug: { eq: $slug } }) {
       id
       body
       frontmatter {

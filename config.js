@@ -7,7 +7,7 @@ module.exports = {
   subtitle: "Web developer.",
   copyright: "© Marek Całus Technologies - All rights reserved.",
   disqusShortname: "",
-  postsPerPage: 4,
+  postsPerPage: 5,
   googleAnalyticsId: "",
   useKatex: false,
   menu: [
@@ -29,10 +29,10 @@ module.exports = {
     photo: "/photo.jpg",
     bio: "Web developer.",
     contacts: {
-      email: "",
-      twitter: "#",
-      github: "#",
-      linkedin: "#"
+      email: "marek.calus3@gmail.com",
+      twitter: "marek_us",
+      github: "mcalus3",
+      linkedin: "marek-ca%C5%82us-745150126"
     }
   }
 };
