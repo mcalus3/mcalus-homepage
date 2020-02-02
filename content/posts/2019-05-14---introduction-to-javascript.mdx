@@ -1,0 +1,111 @@
+---
+title: React course 1 - the Javascript language
+date: "2019-05-14T00:00:00.000Z"
+template: "post"
+draft: false
+slug: "introduction-to-javascript"
+category: " "
+tags:
+  - "react course"
+description: "What is the Javascript language and how to learn it."
+socialImage: "/media/image-6.jpg"
+---
+
+Our first lesson will be about hacking websites.
+
+![Matrix scene](/media/image-12.jpg)
+
+> "But how can I hack websites if I don't even know how computers work?"
+
+Maybe you've never been programming. Maybe you are at the beginning of this journey and you've written only a couple of simple programs and you are not even sure if it's interesting for you. I would like to start this course from showing that coding can be entertaining and that it's like a superpower for a computer user.
+
+# Introduction
+
+What is Javascript? It's a language for programming computers.
+
+"Programming" means just writing commands for the computer (with the intention to get the desired output, of course), nothing more. And the computer is a calculating machine, like the calculators you used at school, but faster. Soon after first computers were built (ENIAC, 1943), people started realizing that they can create more complicated commands out of the existing ones (Assembly language, 1947).
+
+It's like in maths. Imagine that you have a calculator that can only add numbers - if then someone told you to get the solution of 11 x 13, you could just translate it in your head to "repeat 11 times `13 + … + 13`" and calculate the solution with your "adding calculator". In other words, _You can define multiplication as repeated addition_ (3 x 4 = 3 + 3 + 3 + 3). In the same way you can define exponentiation as repeated multiplication "3<sup>4</sup> = 3 x 3 x 3 x 3" and so on...
+
+All the "magic" that computer do nowadays is achieved the same way, but there are just a lot more levels on top of that.
+
+This short story is not meant to scare you – you don't have to know what's going on in all these layers of translation. In fact, no one really knows in the very details how all of this works. Everyone is taking care of his own field of expertise, his own layer. **And so can you.**
+
+# The Javascript language
+
+We will learn about the top layer - **The Javascript language**. It's just a regulated way of saying things to a computer. To be more specific, to a web browser. A web browser is a program that does a lot of things and one of them is interpreting commands written in the Javascript language (the part that does that is called "Javascript engine").
+
+To be able to interactively participate in the rest of this lesson you have to read it on the computer, in a web browser.
+
+![Console image](/media/image-13.png)
+
+Open your web browser's dev tools (usually, it's hitting `f12` key), go to the 'console' tab and find the input bar at the bottom. It's the place where you can talk to the Javascript engine. I'll give you three examples of interesting commands you can give to it. If you want to learn the Javascript language, you will obviously start from simpler expressions like "2+2", but I've prepared these for your entertainment. Copy and paste them into the console, press enter and see what will happen.
+
+1:
+
+```js
+var answer = prompt(
+  "write your birthday date (in MM/DD/YYYY format) and I'll tell you which day of the week was it",
+  "01/22/1995"
+);
+var days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
+];
+var d = new Date(answer);
+var dayName = days[d.getDay()];
+alert("You were born on " + dayName);
+```
+
+2:
+
+```js
+Array.prototype.slice
+  .call(document.querySelectorAll("div,p,span,img,a,body"))
+  .map(function(tag) {
+    tag.style["transform"] =
+      "rotate(" + (Math.floor(Math.random() * 3) - 1) + "deg)";
+  });
+```
+
+3:
+
+```js
+Array.prototype.slice.call(document.querySelectorAll("img")).map(function(tag) {
+  tag.src =
+    "https://www.top13.net/wp-content/uploads/2015/10/perfectly-timed-cat-photos-funny-cover.jpg";
+});
+```
+
+(Have you done? Ok, then read this https://en.wikipedia.org/wiki/Self-XSS and don't ever execute any code you don't understand 😂)
+
+If you do want to learn the Javascript language, you can read it's specification or learn from some free online course (it's useful to learn the basics of html and css too). I've found three courses for you:
+
+1. https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics
+2. https://www.learn-js.org/
+3. https://www.javascript.com/try
+
+If you want to know how the Javascript engine works, you can read these two articles:
+
+1. https://blog.sessionstack.com/how-does-javascript-actually-work-part-1-b0bacc073cf
+2. https://itnext.io/how-javascript-works-in-browser-and-node-ab7d0d09ac2f
+
+I am not able to make you a web developer just from reading my short blog posts. I write them merely as a foreword to courses and articles I'm finding for you. Learning takes a lot of time, but luckily you can learn most of it on the fly while making some interesting project. If you are not yet familiar with the Javascript language, start from courses I linked.
+
+If you are already familiar with web development, I have an idea for exercise for you - try to find some little thing that annoys you while surfing the web and help yourself a bit. Make a script that does something like these:
+
+1. https://twitter.com/lavrton/status/1094400088263282689
+2. https://twitter.com/Swizec/status/1094376986267414528
+3. https://swizec.com/blog/build-chrome-extension/swizec/8278
+
+In the next articles I'll introduce a couple of concepts that I think are necessary to start making a real app.
+
+Sincerely yours,<br />
+~Marek
+
+[Discuss on twitter](https://twitter.com/marek_us/status/1128420941413912577) • [Edit on GitHub](https://github.com/mcalus3/create-react-blog/blob/master/src/routes/posts/2019-05-14-introduction-to-javascript/document-English.mdx)

@@ -1,0 +1,42 @@
+---
+title: How to throttle your react component state
+date: "2019-08-22T00:00:00.000Z"
+template: "post"
+draft: false
+slug: "how-to-throttle-your-react-component-state"
+category: " "
+tags:
+  - "react"
+  - "open-fraksl"
+description: "Useful react hook for throttling component state."
+socialImage: "/media/image-6.jpg"
+---
+
+Hi,
+
+Today we're going to learn how to throttle ([what is throttling?](https://stackoverflow.com/a/25991510/7664770)) updates of your react component. In my case, it was useful for limiting the most computationally expensive function – constructing a tree graph with data about each fractal element. The value of the component's state is being manipulated by the user on a slider, which means that it can change even more often than 60 times per second. The animation would still be equally smooth if the update was limited to, let's say, 20 times per second (due to use of tweening in the process of drawing) and it's the easy way to spare some unnecessary instruction cycles.
+
+That being said, let me show you how to throttle state changes in a component:
+
+1. Find a library with react hook for throttling state on github:
+   ![use-throttle repo page](/media/image-16.png)
+2. Install it in your project:
+   `npm i use-throttle --save`
+3. Use it in your component like this:
+
+```tsx
+// FractalRenderer.tsx
+import { useThrottle } from "use-throttle"; 
+ 
+function useFractalRenderer() { 
+const { state: targetState, dispatch } = useFractalReducer(); 
+const throttledState = useThrottle(targetState, 50); // 🔴 
+// ...
+```
+
+Now your `throttledState` variable is changing at most 20 times per second. Hooray!
+
+Sincerely yours,<br />
+~Marek
+
+[Discuss on twitter](https://twitter.com/marek_us/status/1164640826984665088) • [Edit on GitHub](https://github.com/mcalus3/create-react-blog/blob/master/src/routes/posts/2019-08-22-how-to-throttle-your-react-component-state/document-English.mdx)

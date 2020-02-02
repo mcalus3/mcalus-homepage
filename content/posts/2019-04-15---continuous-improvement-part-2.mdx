@@ -1,0 +1,66 @@
+---
+title: Continuous improvement part 2
+date: "2019-04-15T00:00:00.000Z"
+template: "post"
+draft: false
+slug: "continuous-improvement-part-2"
+category: " "
+tags:
+  - "thoughts"
+description: "Couple of things that I've noticed lately to be improved."
+socialImage: "/media/image-6.jpg"
+---
+
+I would like to share with you what I've collected lately in my **workplace improvement framework**, to give you a concrete example of what I was talking about in my previous post. I'm not including any code related issues here, because it would be too specific on the context and my programming language. It would be very hard to describe so that everyone would understand, so I'll make some clean coding/design patterns guide another time 👨‍💻.
+
+Here are the 6 problems that I've perceived and described in my work lately:
+
+**1. Intellisense isn't working**
+
+- **Context:** My Visual studio IDE runs slowly and the Intellisense hints are not showing up while I'm writing.
+- **Problem:** This slows down my coding.
+- **Solution:** I think that it's occurring because the Resharper extension is indexing our big solution (it has tens of projects). I can unload some projects, or schedule some solution-wide indexing. I will also check if Resharper has any settings that could reduce its performance drag.
+
+**2. Bad meeting agendas**
+
+- **Context:** I have to attend meetings to which I have no input and I don't learn on them anything I couldn't read by myself in our documents. On the other side, we don't have time for the meetings that we could benefit from (for example retrospectives).
+- **Problem:** I'm wasting time and I don't have designated meetings for dealing with team-related problems or improvements.
+- **Solution:** Gather solid examples of meetings that should be improved, define the meetings I would like to have instead and present this problem to my Team leader. Propose that I could run such a meeting to show the team what I would like to have.
+
+**3. Bad meetings scheduling**
+
+- **Context:** Our Team Leader is appointing our meetings at the last minute and usually, it has to be rescheduled for the next day because someone can't attend or we don't have any conference room available. Sometimes we are postponing events like that for a couple of days in a row.
+- **Problem:** It's slowing down our work and discourages team to have meetings.
+- **Solution:** Propose the team leader that I would take care of arranging exact time and room for upcoming meetings if he notifies me in advance about them. That way he would be relieved from this task and the team would have their meetings organized better.
+
+**4. Division of the dev and test environments**
+
+- **Context:** Our team consists of developers and testers. Developers commit their work to our team's git branch and testers build the testing environment from this branch every day. If the environment is being built at the moment in which I am in the middle of implementing a feature or just stubbed some of the user interfaces, the testers perceive this as a bug, because it doesn't look as in specification. They don't know if I plan to change it, or if I really overlooked it in the development.
+- **Problem:** We waste time discussing if certain elements are still under development, or when the testers faultly file it as a bug, which soon gets discarded.
+- **Solution:** The testing environment should contain only the code that comes from **resolved** tickets. The code that developers consider finished and ready for testing. There are a couple of ways to enforce that:
+  1. We could work on our private branches and merge to our team branch only after the whole feature is ready.
+  2. We could introduce a second, testing branch, which would cherry-pick from the dev branch only the commits from completed tasks.
+
+**5. Too little autonomy**
+
+- **Context:** our team works with a PO who is abroad. He maintains a specification that we should implement. Unfortunately, his requirements are specific to the very end and after each demo, we get a long list with everything he would like to have changed: text, buttons placement, UI widgets appearance, etc.
+- **Problem:** I lose my motivation to work when I feel that I can't decide even on the littlest detail of my software. I waste a lot of time on ineffectual communication and disputes about things that are too small and irrelevant to spend so much time on them.
+- **Solution:** I am not the proper person to introduce changes in the cooperation on such a high level, so I should report this problem to my team leader. For future discussion, I have to gather specific examples of situations in which I believe the time was unnecessarily wasted. I should also try to convince my team to establish some rules of cooperation which would set clear boundaries of our autonomy.
+
+**6. Lack of consistency in specification maintaining**
+
+- **Context:** Our product owner maintains the specification as a collection of UI views designed in a graphical editor (most likely MS Paint) and statements about this UI's. Every time when he comes up with something new, he tries to add it to the specification, which generates two effects:
+  1. The specification is huge and it's hard to separate the important and not important parts. It also fails in conveying the intent and purpose of individual features.
+  2. The specification has mixed up parts from different stages of development (obsolete) and some of the most recent changes in the product owner's vision could be even not written down at all.
+     We are officially obliged to implement the specification completely, but we don't work like that, because everyone knows that it's not possible.
+- **Problem:** It's hard to determine what are his current requirements and gather key points to inspect at the demo. Guidelines for features are constantly changing and we don't know what to do. Our work is often rejected by the PO because of communication problems.
+- **Solution:** Like before, report this problem to my team leader. Gather specific examples of situations in which this caused a waste of our time. Propose a new way of writing specification and new PO-devteam cooperation. Maybe the spec should be based on user stories? Maybe it should focus on features from the usability point of view, describe what user would be able to do and what business need it fulfills?
+
+Maybe you are thinking that these problems could be addressed without such lengthy descriptions and artificial ceremony that my _workplace improvement framework_ introduces, but from my experience I know that I tend to get used to problems so much, that I eventually stop noticing them. I am convinced that this is one of the features that distinguish a professional - he doesn't sweep problems under the rug. He doesn't say that he is unable to do anything about them. He doesn't swim with the current. And _workplace improvement framework_ helps me not behaving like that.
+
+![It's fine](/media/image-9.jpg)
+
+Sincerely yours,<br />
+~Marek
+
+[Discuss on twitter](https://twitter.com/marek_us/status/1118156108680527872) • [Edit on GitHub](https://github.com/mcalus3/create-react-blog/blob/master/src/routes/posts/2019-04-15-continuous-improvement-part-2/document-English.mdx)

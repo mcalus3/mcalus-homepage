@@ -1,0 +1,55 @@
+---
+title: Inspiration behind open-fraksl
+date: "2019-08-15T00:00:00.000Z"
+template: "post"
+draft: false
+slug: "inspiration-behind-open-fraksl"
+category: " "
+tags:
+  - "react"
+  - "open-fraksl"
+description: "My current pet project - its inspiration, goals, and history."
+socialImage: "/media/image-6.jpg"
+---
+
+## Inspiration behind open-fraksl
+
+In June 2018 I was tinkering with some graphic generating apps like [fluid sim](https://paveldogreat.github.io/WebGL-Fluid-Simulation/) or [particle flow](https://play.google.com/store/apps/details?id=com.nfaralli.particleflow). That's how I found [Fraksl](https://www.fraksl.com/) and sunk in it for good. Its idea is brilliant - it's just [visual feedback loop](https://www.youtube.com/watch?v=OWnC9tSA3iA) implemented as an app. It's a very simple concept that allows you to generate so many different images that I was delighted by it. I wondered "would I be able to make such an app?" and had to try it.
+
+There were also some libraries that I wanted to try out, like Material UI and Pixi.js, so I decided to wire that up into a new web app. I didn't know yet that it would require so much work from me and I will learn so much working with it.
+
+## Goals
+
+So my first goal was to make a fraksl clone, but soon I also realized that having all the infrastructure set up, I could make it draw any different things, like [Pythagorean fractal from Swizec's blog](https://swizec.com/blog/dancing-tree-fractal-react/swizec/7288), or all the cool fractals I was learning in school. A lot of different ideas was coming to my head since I started it and now my goals are:
+
+- Make something that I will be able to have fun with (it's 100% achieved!)
+- Acquire skills as a web app developer and have a project in portfolio that would confirm it (popular libraries, web app features like navigation, authentication, configuration, persistence, etc.)
+- Create something that would be impressive for other programmers - for example in terms of performance (for example, [sandspiel.club](https://sandspiel.club) made such a big impression on me)
+- Create an app that would be an interesting toy for every casual computer user - my mom, my friends, and their kids. Maybe even inspiring them to get interested in math?
+- Create a tool that allows creative people to make something beautiful/interesting and share it with the world (just like [dwitter.net](https://dwitter.net)) (0% achieved yet 😓)
+
+## History
+
+First, I did it "the pure way" - everything was a component, there was no imperative code, all state was held in redux store…
+
+By "everything was a component" I meant that every rectangle drawn on screen was A SEPARATE REACT COMPONENT (thanks to react-pixi-fiber library, which is a jsx wrapper for pixi.js sprites) that was taking its props from parent component and redux store. For a newbie like me it was a pattern that helped me quickly move forward, but taking into consideration that I intended to draw hundreds of thousands of fractal elements, this wasn't a good idea :P
+
+So I guess that you can add me to the list of "people who try to stick their favorite library into places it doesn't belong" :P (if you open the image in separate tab, you will see never-ending recurrent tree of `Fractal` components)
+
+![open-fraksl screen](/media/image-15.png)
+
+And then, after commit "Further architectural refactor." I stopped development, can't recall why exactly. Maybe it's because my second kid was born two weeks before that and I like _really_ didn't have any free time. 😋
+
+Six months have passed and React hooks came. At this time, Kent C. Dodds did [a great post](https://kentcdodds.com/blog/application-state-management-with-react) that totally changed my opinion on the architecture of react apps (he shortly explains the idea of "colocation" without referencing React explicitly [here](https://kentcdodds.com/blog/colocation) - for people that are not from the React background). I was eager to test this new approach and I returned to my old fractal drawing app. I've rewritten it to use hooks, then split the state management from one redux-managed into multiple, react context-managed. I liked that and continued to work on that app.
+
+## Additional inspirations:
+
+- [Swizec's app with pythagorean fractal on which I've been learning react fundamentals](https://swizec.github.io/react-fractals/)
+- [kinect-driven input to fractal parameters - cool idea](https://www.youtube.com/watch?v=3P92EMeXtbA)
+- [Video of app that draws fractals on screen using real video feedback loop](https://www.youtube.com/watch?v=wujlqihioEU)
+- [cindyJS is a mathematical language library with some nice fractal drawing examples](https://cindyjs.org/examples/24_SimpleTree.html)
+
+Sincerely yours,<br />
+~Marek
+
+[Discuss on twitter](https://twitter.com/marek_us/status/1161715320786214913) • [Edit on GitHub](https://github.com/mcalus3/create-react-blog/blob/master/src/routes/posts/2019-08-15-inspiration-behind-open-fraksl/document-English.mdx)

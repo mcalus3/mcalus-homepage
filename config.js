@@ -5,7 +5,7 @@ module.exports = {
   pathPrefix: "/",
   title: "Marek Całus - Homepage",
   subtitle: "Web developer.",
-  copyright: "© All rights reserved.",
+  copyright: "© Marek Całus Technologies - All rights reserved.",
   disqusShortname: "",
   postsPerPage: 4,
   googleAnalyticsId: "",
