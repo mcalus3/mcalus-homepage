@@ -1,0 +1,119 @@
+.hidden {
+  animation-name: fadeOut, invisiblyShrinkFontSize;
+  animation-duration: 200ms, 500ms;
+  animation-delay: 0ms, 200ms;
+  font-size: 0;
+  opacity: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 0;
+}
+.critical {
+  animation-name: invisiblyGrowFontSize, fadeIn;
+  animation-duration: 500ms, 200ms;
+  animation-delay: 0ms, 500ms;
+}
+
+.info {
+  animation-name: invisiblyGrowFontSize, fadeIn;
+  animation-duration: 500ms, 200ms;
+  animation-delay: 0ms, 500ms;
+}
+
+.verbose {
+  animation-name: invisiblyGrowFontSize, fadeIn;
+  animation-duration: 500ms, 200ms;
+  animation-delay: 0ms, 500ms;
+  padding: 8px;
+  border: 1px solid blue;
+}
+
+.indent {
+  margin-left: 3em;
+}
+
+.no-spacing {
+  animation-name: removeSpacing;
+  animation-duration: 500ms;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.spacing {
+  animation-name: addSpacing;
+  animation-duration: 500ms;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+@keyframes removeSpacing {
+  0% {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  100% {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+  }
+}
+
+@keyframes addSpacing {
+  0% {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+  }
+  100% {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@keyframes invisiblyGrowFontSize {
+  0% {
+    font-size: 0;
+    opacity: 0;
+  }
+  100% {
+    font-size: 1em;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    font-size: 1em;
+    opacity: 1;
+    line-height: 1.625rem;
+  }
+  100% {
+    line-height: 1.625rem;
+    font-size: 1em;
+    opacity: 0;
+  }
+}
+
+@keyframes invisiblyShrinkFontSize {
+  0% {
+    font-size: 1em;
+    opacity: 0;
+    margin-top: 1rem;
+    margin-bottom: 1.625rem;
+    line-height: 1.625rem;
+  }
+  100% {
+    font-size: 0;
+    opacity: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 0;
+  }
+}
