@@ -184,14 +184,14 @@ const MyStory = () => {
 
       <p className={getCriticalClass()}>
         Languages, frameworks, and libraries in which I'm most experienced are:
-        <ul>
-          <li>Typescript</li>
-          <li>React</li>
-          <li>GraphQL</li>
-          <li>Serverless</li>
-          <li>Material UI</li>
-          <li>Cypress</li>
-        </ul>
+        <div className={styles.logosContainer}>
+          <img src="/media/ts-logo-text.svg" />
+          <img src="/media/react-text.png" />
+          <img src="/media/graphql-text.png" />
+          <img src="/media/mui-text.png" />
+          <img src="/media/serverless-text.png" />
+          <img src="/media/cypress-text.png" />
+        </div>
       </p>
     </>
   );
