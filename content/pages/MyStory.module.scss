@@ -1,3 +1,13 @@
+.highlighted {
+  outline: 1px solid blue;
+}
+
+.logLevel {
+  display: inline-block;
+  padding: 8px;
+  background-color: #eeeeee;
+}
+
 .hidden {
   animation-name: fadeOut, invisiblyShrinkFontSize;
   animation-duration: 200ms, 500ms;

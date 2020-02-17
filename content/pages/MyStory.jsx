@@ -22,11 +22,26 @@ const MyStory = () => {
 
   return (
     <>
-      <div>
-        <div>Choose your log level: </div>
-        <button onClick={() => setLogLevel(LOG_CRITICAL)}>Critical</button>
-        <button onClick={() => setLogLevel(LOG_INFO)}>Info</button>
-        <button onClick={() => setLogLevel(LOG_VERBOSE)}>Verbose</button>
+      <div className={styles.logLevel}>
+        <div>Choose log level: </div>
+        <button
+          onClick={() => setLogLevel(LOG_CRITICAL)}
+          className={logLevel === LOG_CRITICAL ? styles.highlighted : null}
+        >
+          Critical
+        </button>
+        <button
+          onClick={() => setLogLevel(LOG_INFO)}
+          className={logLevel === LOG_INFO ? styles.highlighted : null}
+        >
+          Info
+        </button>
+        <button
+          onClick={() => setLogLevel(LOG_VERBOSE)}
+          className={logLevel === LOG_VERBOSE ? styles.highlighted : null}
+        >
+          Verbose
+        </button>
       </div>
 
       <p className={getParagraphClass()}>
@@ -183,7 +198,7 @@ const MyStory = () => {
       </p>
 
       <p className={getCriticalClass()}>
-        Languages, frameworks, and libraries in which I'm most experienced are:
+        Languages, frameworks, and libraries in which I like to work the most:
         <div className={styles.logosContainer}>
           <img src="/media/ts-logo-text.svg" />
           <img src="/media/react-text.png" />
