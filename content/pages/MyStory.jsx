@@ -10,15 +10,15 @@ const LOG_VERBOSE = "LOG_VERBOSE";
 const MyStory = () => {
   const [logLevel, setLogLevel] = useState(LOG_CRITICAL);
 
-  const getCriticalClass = () => styles["critical"];
+  const getCriticalClass = () => styles.critical;
   const getInfoClass = () =>
-    logLevel === LOG_CRITICAL ? styles["hidden"] : styles["info"];
+    logLevel === LOG_CRITICAL ? styles.hidden : styles.info;
   const getVerboseClass = () =>
-    logLevel === LOG_VERBOSE ? styles["verbose"] : styles["hidden"];
+    logLevel === LOG_VERBOSE ? styles.verbose : styles.hidden;
   const getCriticalOnlyClass = () =>
-    logLevel === LOG_CRITICAL ? styles["critical"] : styles["hidden"];
+    logLevel === LOG_CRITICAL ? styles.critical : styles.hidden;
   const getParagraphClass = () =>
-    logLevel === LOG_CRITICAL ? styles["no-spacing"] : styles["spacing"];
+    logLevel === LOG_CRITICAL ? styles.noSpacing : styles.spacing;
 
   return (
     <>
@@ -56,9 +56,7 @@ const MyStory = () => {
       </p>
 
       <p className={getParagraphClass()}>
-        <span className={`${getCriticalOnlyClass()} ${styles["indent"]}`}>
-          -{" "}
-        </span>
+        <span className={`${getCriticalOnlyClass()} ${styles.indent}`}>- </span>
         <span className={getInfoClass()}> In the beginning, during my </span>
         <span className={getCriticalClass()}>internship at Intel</span>
         <span className={getCriticalOnlyClass()}> (2015-2017)</span>
@@ -91,9 +89,7 @@ const MyStory = () => {
       </p>
 
       <p className={getParagraphClass()}>
-        <span className={`${getCriticalOnlyClass()} ${styles["indent"]}`}>
-          -{" "}
-        </span>
+        <span className={`${getCriticalOnlyClass()} ${styles.indent}`}>- </span>
         <span className={getInfoClass()}>
           After a long internship at Intel Corp. I tried to find a good place
           for my career,{" "}
@@ -120,24 +116,25 @@ const MyStory = () => {
       <p className={getParagraphClass()}>
         <span className={getCriticalOnlyClass()}>- </span>
         <span className={getCriticalClass()}>
-          I'm a very passionate communicator.{" "}
+          I'm a passionate communicator.{" "}
         </span>
         <span className={getInfoClass()}>
           I love to teach other people, write down my thoughts and polish them
           up until they are ready to be published as a blog post. When coding,
           I'm constantly thinking if my code conveys it's meaning well enough to
-          the future maintainers.
+          future maintainers. I value honesty and always try to stand up for the
+          good reason instead of just going with the flow.
         </span>
       </p>
 
-      <p className={getParagraphClass()}>
+      {/* <p className={getParagraphClass()}>
         <span className={getCriticalOnlyClass()}>- </span>
         <span className={getCriticalClass()}>I'm a far-sighted person. </span>
         <span className={getInfoClass()}>
           I always like to do my work from general to specific, think in the big
           picture and anticipate the future.
         </span>
-      </p>
+      </p> */}
 
       {/* <p className={getVerboseClass()}>
         *I'm this type of man, who który po otrzymaniu zadania "zaszyfruj dwie
@@ -154,14 +151,14 @@ const MyStory = () => {
       <p className={getParagraphClass()}>
         <span className={getCriticalOnlyClass()}>- </span>
         <span className={getCriticalClass()}>
-          I'm experienced in improving processes in my workplace.{" "}
+          I like taking various roles to bring additional value to my team.{" "}
         </span>
         <span className={getInfoClass()}>
-          I have a habit of analyzing and improving processes in my work. It can
-          be internal communication in the team, work planning and evaluating
-          some process or even facilitating regular and company-wide events for
-          speaking and lesson sharing. I like building a culture of taking
-          ownership.
+          I've been supporting my team before as a scrum master and project
+          manager. I have a habit of analyzing and improving the way my team
+          works - it can be teams internal communication, work planning and
+          evaluating, facilitating trainings or even company-wide events. I like
+          building a culture of proactive approach and taking ownership.
         </span>
       </p>
 
@@ -182,15 +179,22 @@ const MyStory = () => {
           fully-functional product.{" "}
         </span>
         <span className={getCriticalClass()}>
-          I like working in organizations that focus on what is most important
-          to deliver value.
+          I focus on business goals and implement them quickly, but always leave
+          my solutions able to be scaled in the future.{" "}
         </span>
         <span className={getInfoClass()}>
           I'm currently investing my career in frontend web development because
           I believe that it's the most efficient way for me to be able to
-          deliver some real value out of my work. I want to avoid and prevent
-          technical problems instead of taking pride in solving them.
+          deliver some real value out of my work.
         </span>
+      </p>
+
+      <p className={getVerboseClass()}>
+        I'm this type of person that instead of taking pride in solving some
+        hard technical problem, stops and thinks if it even has to be done in
+        the first place. Code without technical debt doesn't mean code that is
+        scalable and flexible - it means code that can be easily refatored to
+        such if need for that would appear in the future.
       </p>
 
       <p className={getVerboseClass()}>
@@ -198,7 +202,7 @@ const MyStory = () => {
       </p>
 
       <p className={getCriticalClass()}>
-        Languages, frameworks, and libraries in which I like to work the most:
+        My preferred tech stack is:
         <div className={styles.logosContainer}>
           <img src="/media/ts-logo-text.svg" />
           <img src="/media/react-text.png" />
