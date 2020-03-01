@@ -1,0 +1,106 @@
+---
+title: Recursive-buttons part 1
+date: "2020-02-23T00:00:00.000Z"
+template: "post"
+draft: false
+slug: "recursive-buttons-part-1"
+category: " "
+tags:
+  - "recursive-buttons"
+  - "react"
+description: "I've published my first npm package. It's an awesome (but completely useless) react component."
+socialImage: "/media/recursive-cropped.png"
+---
+
+import { RecursiveButtons } from "recursive-buttons";
+import { CodeSandbox } from "../../src/components/CodeSandbox";
+
+<div>
+  <div style="width: 100px; height: 50px; float: left; margin-right: 16px; margin-top: 8px">
+    <RecursiveButtons />
+  </div>
+
+I've published my first npm package. It's an awesome (but completely useless) react component and the only project that will ever use it is my blog, just for the sake of explaining it. Despite this, [I love creating fractals](https://openfraksl.mcalus.dev), even if it's for no use 😉.
+
+</div>
+
+<div style="width: 400px; height: 25px; margin: 0 auto -32px auto">
+  <RecursiveButtons text="" />
+</div>
+
+### RecursiveButton component
+
+
+About a month ago, during a walk, I was thinking about what new fractal app I could create. Suddenly, an interesting idea came to my head and I rushed to check it out.
+
+There is a fractal geometric shape called _Sierpinski's Carpet_. It was first described by Polish mathematician, Wacław Sierpiński in 1916. The construction of the Sierpinski carpet begins with a square. The square is cut into 9 congruent subsquares in a 3-by-3 grid, and the central subsquare is removed. The same procedure is then applied recursively to the remaining 8 subsquares, ad infinitum. Example below:
+
+<img src="/media/gif-3.gif" alt="animated Sierpinski's Carpet" width="200px" />
+
+I've implemented it as an interactive clicker and it turned out to be very simple:
+
+(if you can't see code sandbox below, try to turn off your browser extensions that block tracking - they can interfere with code sandbox embeds)
+
+<CodeSandbox
+  url="recursive-buttons-01-kv527"
+  params={{ module: "/src/RecursiveButton.jsx" }}
+  title="recursive-buttons-01"
+/>
+
+Here it is how it works - it's a flexbox component that you have to wrap in a parent element with specified width and height. Every `RecursiveButton` component holds its own "clicked" state and initially displays a button. After the button is clicked it begins rendering vertical flexbox instead of a button, with three horizontal flexboxes for three rows of recursively nested, new `RecursiveButton` components. All flex child elements (button, rows, column and a gap in the middle) have to have `flex-grow` style value set to `1` so they fill all available space evenly.
+
+<div style="width: 400px; height: 25px; margin: 0 auto -32px auto">
+  <RecursiveButtons text="" />
+</div>
+
+### Styling and imitating the feel of bubble wrap
+
+I had to set button padding and border values to `0` because otherwise when user creates asymmetrical pattern, buttons are being "squished" and move to the side (You can try it - just delete the `r-button` class in line 8 in above code sandbox and see how it looks like. It's quite interesting). After I've done it, it turned out that if you set the button's `border-width` to `0`, you lose default browser styles for that button - you have to implement `hover` and `active` pseudo-classes by yourself. To correct that, I've added some custom styles to improve the user experience - I wanted it to feel like popping a bubble wrap, so I've added gradients to imitate a 3d button effect.
+
+<CodeSandbox
+  url="recursive-buttons-02-zz0fo"
+  params={{
+    module: "/src/styles.css",
+    highlights: "25,26,27,28,29,30,31,32,33,34,35,36,37,38",
+   }}
+  title="recursive-buttons-02"
+/>
+
+<div style="width: 400px; height: 25px; margin: 0 auto -32px auto">
+  <RecursiveButtons text="" />
+</div>
+
+### pop sound
+
+And then yet another idea came to my head - popping bubble wrap can't be a complete experience without "pop" sound, is it? So I've added it too (fortunately it required only 5 new lines of code):
+
+<CodeSandbox
+  url="recursive-buttons-03-i3p2f"
+  params={{
+    module: "/src/RecursiveButton.jsx",
+    highlights: "3,4,5,6,7,16",
+   }}
+  title="recursive-buttons-03"
+/>
+
+<div style="width: 400px; height: 25px; margin: 0 auto -32px auto">
+  <RecursiveButtons text="" />
+</div>
+
+### Additional features
+
+<p style="margin-bottom: 10px; margin-top: 24px">After that I've added some additional features like:</p>
+<ul style="margin-top: 10px">
+  <li>popping components on button hover (so-called <i>rampage mode</i>)</li>
+  <li>undo (it's just reverting state of clicked component back to "unclicked". All it's children are becoming unmounted after that)</li>
+  <li>counting how many buttons are on the screen (it can run smoothly even up to 10,000 elements, each of them being separate react component with internal state. As always, fractals are great for performance benchmarking)</li>
+</ul>
+
+You can check out a full version of recursive buttons at [https://recursivebuttons.mcalus.dev](https://recursivebuttons.mcalus.dev)
+
+Or install the "lite" version as a library with `npm install recursive-buttons`. All buttons that are rendered directly in this post are from this library - I bet your site could also use some nice fractal widgets, it would be fancier 😉.
+
+Sincerely yours,<br />
+~Marek
+
+[Discuss on twitter](https://twitter.com/marek_us/status/1234150867353374721) • [Edit on GitHub](https://github.com/mcalus3/mcalus-homepage/blob/master/content/posts/2020-03-01---recursive-buttons-part-1.mdx)
