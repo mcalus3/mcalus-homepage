@@ -1,0 +1,105 @@
+---
+title: How to handle touch move event in multiple elements?
+date: "2020-03-08T00:00:00.000Z"
+template: "post"
+draft: false
+slug: "how-to-handle-touch-move"
+category: " "
+tags:
+  - "recursive-buttons"
+  - "react"
+description: "Recursive-buttons part 2 - how to maintain consistency across mouse and touch events in case of swiping over multiple elements."
+socialImage: "/media/recursive-cropped.png"
+---
+
+import { RecursiveButtons } from "recursive-buttons";
+import { CodeSandbox } from "../../src/components/CodeSandbox";
+
+### Rampage mode for the mouse and touchscreens
+
+<div>
+  <div style="width: 100px; height: 50px; float: left; margin-right: 16px; margin-top: 8px">
+    <RecursiveButtons hoverMode text="hover over me!"/>
+  </div>
+
+I've added something called "rampage mode" to recursiveButtons. In this mode, buttons are being clicked as soon as the user hovers a cursor over them. You can see below that for mouse events it requires just one change:
+
+</div>
+
+<CodeSandbox
+  url="recursive-buttons-04-sdjuz"
+  params={{
+    module: "/src/RecursiveButton.jsx",
+    highlights: "14",
+   }}
+  title="recursive-buttons-04"
+/>
+
+<div style="width: 400px; height: 25px;">
+  <RecursiveButtons text="" />
+</div>
+
+Then I tried to enable it also for touch events - I was thinking that it will be equally easy. But it wasn't. Solving it took me two days.
+
+First, it turned out that Touch events _capture_ the element on which touch action has started. To visualize it, I've created the example below:
+
+- first, try to click and "drag" over multiple buttons with mouse cursor - you will be painting all the buttons along the way
+- then open devtools (f12), enter ["responsive design mode"](/media/image-17.png) and try to repeat the same (browser will simulate touch events instead of mouse). You will see that only first button is being colored
+
+<CodeSandbox
+  url="touch-capture-example-1s6fq"
+  params={{
+    module: "/src/App.js",
+   }}
+  title="touch-capture-example-01"
+/>
+
+Although surprisingly inconsistent for developers, it's justified for typical mobile usage - when user drags something on small screen (let's say, a slider input), he doesn't want to accidentally touch other things on the way - the browser assumes that until user releases his finger, he doesn't want to touch anything else.
+
+Unfortunately, I am at this unique situation in which I _need_ it to touch other elements. It took me a lot of searching to finally get to [some _stack overflow_ page](https://stackoverflow.com/questions/8813051/determine-which-element-the-mouse-pointer-is-on-top-of-in-javascript
+), on which someone suggested such a solution in which I have to read x and y posiotions from the touch event and then use a `document.elementFromPoint()` function to get the real element under the touch pointer Then I can invoke a "click" event on it and it will trigger a click handler installed in a react component for this element. And it worked:
+
+<CodeSandbox
+  url="touch-capture-example-2-e0xxq"
+  params={{
+    module: "/src/App.js",
+    highlights: "10,11,12,13,14,36,37,38,39,40"
+   }}
+  title="touch-capture-example-03"
+/>
+
+<div style="width: 400px; height: 25px;">
+  <RecursiveButtons text="" />
+</div>
+
+### Prolonging the event for an element that is being unmounted
+
+I had yet one more problem to solve - _event target_ is the element that I touch, not the element that has the handler (in my case handler is attached to the parent of all buttons). If the target is being unmounted during the touch event, the `touchMove` event stops being fired.
+
+<CodeSandbox
+  url="touch-capture-example-3-54xcb"
+  params={{
+    module: "/src/App.js",
+    highlights: "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24"
+   }}
+  title="touch-capture-example-03"
+/>
+
+Luckily, I've found [another workaround for this issue on stack overflow](https://stackoverflow.com/questions/33298828/touch-move-event-dont-fire-after-touch-start-target-is-removed). It suggested to "programatically" add the `touchmove` and `touchend` (this one just for cleanup) events to a target when the click starts. I don't know exactly why, but it's enough to have this event living loner than a target that it's initially attached to. 
+
+And that's how I've finally made it:
+
+<CodeSandbox
+  url="touch-capture-example-4-2l6lb"
+  params={{
+    module: "/src/customTouchHandler.js",
+   }}
+  title="touch-capture-example-04"
+/>
+
+Happy button popping 😊
+
+Sincerely yours,<br />
+~Marek
+
+[Discuss on twitter](https://twitter.com/marek_us/status/1236534957583073281) • [Edit on GitHub](https://github.com/mcalus3/mcalus-homepage/blob/master/content/posts/2020-03-08---how-to-handle-touch-move.mdx)
