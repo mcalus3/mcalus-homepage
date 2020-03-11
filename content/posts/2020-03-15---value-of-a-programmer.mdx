@@ -1,0 +1,41 @@
+---
+title: The real value of a programmer
+date: "2020-03-15T00:00:00.000Z"
+template: "post"
+draft: false
+slug: "value-of-a-programmer"
+category: " "
+tags:
+  - "programming"
+description: 'Value of a programmer is defined by how fast he can achieve his goals, not by how good he is at "programming".'
+socialImage: "/media/recursive-cropped.png"
+---
+
+The real value of a programmer is defined by how fast he can achieve his goals, not by how good he is at "programming".
+
+People often don't understand that the only reason they are getting paid is just because their actions will make their clients/employers getting paid (the same or even more). Their "level of programming skills" doesn't matter in that relationship. Programming skills are very hard to prove anyway. And to be clear - I'm not making a statement against avoiding tech debt, perserving maintainability of apps or generally "software quality". I'm making a statement about ["not invented here"](https://en.wikipedia.org/wiki/Not_invented_here) syndrome and ["when you are a hammer, everything looks like a nail"](https://en.wikipedia.org/wiki/Law_of_the_instrument) syndrome.
+
+Think, for example, that you have to create some simple CRUD application for internal use in your company - you can assign it to a team of 5 developers who will spend three months cautiously making the backend app, frontend app, integrating them by REST API, solving all the challenges with performance, security, create all graphical components and make them responsive… Total budget: 100,000\$ - that's what it takes nowadays to make high quality, personalized web app, isn't it?
+
+Or you can realize that CRUD apps are so common use case that for sure there is a possibility to auto-generate them just by specifying the data model. You evaluate some solutions like Hasura or Prisma for the backend, you try to auto-generate frontend app with something like react-admin, host everything with some serverless service like Netlify or Heroku and surprisingly you manage to complete it in one week. Total budget: 5,000\$
+
+You can do exactly (or almost exactly) the same work with 10x or even 50x lesser budget. How?
+
+1. First, try to estimate the ratio of [accidental to essential](https://en.wikipedia.org/wiki/No_Silver_Bullet#Summary) work that you are doing during the project. For example, if you are in the process of making a CRUD app, compare length of your specification (specs are never ideal, but for the case of this estimation try to imagine that it consist of detailed description of all functionalities and whole appearance of the app) to the length of a source code that implements it. If source code is longer by orders of magnitude, this means that there is a space for an improvement because most of the code isn't addressing business requirements, but rather some technical details.
+2. Most probably, these technical details has been already solved by someone - find if you can use some external solution to implement your spec on top of it. Try to auto-generate your app, auto-convert, start from a template, fork some existing project, etc.
+
+If David Heinmeier Hansson in 2005 was able to [create a whole blog app in 15 minutes](https://www.youtube.com/watch?v=Gzj723LkRJY) using Ruby on Rails, then why are we, in 2020, struggling orders of magnitude longer to make the same CRUD apps and static sites?
+
+We, as programmers, should focus more on being able to solve certain business needs in a shorter time than merely "being better at programming in some X language".
+
+You could say that this can't be applied to apps or systems that aim to solve some totally new problems and you are right. In the past I thought _"eventually, all programming problems are unique, that's why it will never be automated"_ but now I think that in reality, an overwhelming majority of programmers' work is directed towards some small set of repetitive problems - crud apps, static sites, integration of different web systems, etc.
+
+If you are a programmer that is making these repetitive apps for a living and you want to increase your value, maybe try to pick some popular business need (like developing CRUD apps) and make a research on what is the fastest way to solve it - I'm sure that there are plenty of brilliant frameworks and templates that are totally underestimated by the community. Who knows, maybe someday you will grab that \$100,000 project by yourself and deliver it in one week because no one else knew that this problem is already solved by someone else?
+
+Eric Dietrich has been writing somehow about it in his blog post: https://daedtech.com/coders-in-the-hands-of-a-missing-god-how-newly-minted-freelancers-badly-miss-the-point/  
+and here is an interesting, long discussion on the same topic (with arguments both for and against my stance): https://news.ycombinator.com/item?id=10979916
+
+Sincerely yours,<br />
+~Marek
+
+[Discuss on twitter](https://twitter.com/marek_us/status/1236534957583073281) • [Edit on GitHub](https://github.com/mcalus3/mcalus-homepage/blob/master/content/posts/2020-03-08---how-to-handle-touch-move.mdx)
