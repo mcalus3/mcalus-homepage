@@ -13,26 +13,26 @@ module.exports = {
   menu: [
     {
       label: "Blog",
-      path: "/"
+      path: "/",
     },
     {
       label: "My projects",
-      path: "/pages/projects"
+      path: "/pages/projects",
     },
     {
       label: "About me",
-      path: "/pages/about"
-    }
+      path: "/pages/about",
+    },
   ],
   author: {
     name: "Marek Całus",
-    photo: "/photo.jpg",
+    photo: "/photo.png",
     bio: "Web developer.",
     contacts: {
       email: "marek.calus3@gmail.com",
       twitter: "marek_us",
       github: "mcalus3",
-      linkedin: "marek-ca%C5%82us-745150126"
-    }
-  }
+      linkedin: "marek-ca%C5%82us-745150126",
+    },
+  },
 };
