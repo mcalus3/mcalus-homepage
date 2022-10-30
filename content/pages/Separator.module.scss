@@ -1,0 +1,12 @@
+.separator {
+  box-sizing: border-box;
+  margin-bottom: 0.25rem;
+  margin-top: 0.25rem;
+  height: 0.25rem;
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+  --tw-gradient-from: #6366f1;
+  --tw-gradient-stops: var(--tw-gradient-from), #a855f7,
+    var(--tw-gradient-to, rgba(168, 85, 247, 0));
+  --tw-gradient-to: #ec4899;
+  width: 7rem;
+}
