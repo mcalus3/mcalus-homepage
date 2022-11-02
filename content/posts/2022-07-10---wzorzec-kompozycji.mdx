@@ -13,7 +13,7 @@ socialImage: "/media/image-18.png"
 
 Cześć,
 
-Jest taka gra planszowa której fabuła rozgrywa się na łodzi podwodnej i gracze muszą współpracować przy jej naprawach, żeby statek wytrzymał w jednym kawałku aż do momentu kiedy przybędzie pomoc. Najważniejsza akcja którą gracz może podejmować w tej grze to _próba naprawy_. Jeżeli wykonamy próbę naprawy trwającą 10 minut (można powiedzieć - 10 tur), to mamy pewność, że naprawa się powiedzie. Jeżeli nie mamy aż tyle czasu i chcemy zaryzykować, to możemy podejmować krótsze próby naprawy - ale każda minuta odjęta od tego podstawowego czasu dziesięciu minut zmniejsza szanse powodzenia o 10% - więc jeśli pdejmiemy próbę naprawy 5-minutową, to mamy tylko 50% szansy na to że się uda, a jeżeli spróbujemy naprawić w minutę, to szansa na powodzenie wynosi tylko 10%.
+Jest taka gra planszowa której fabuła rozgrywa się na łodzi podwodnej i gracze muszą współpracować przy jej naprawach, żeby statek wytrzymał w jednym kawałku aż do momentu kiedy przybędzie pomoc. Najważniejsza akcja którą gracz może podejmować w tej grze to _próba naprawy_. Jeżeli wykonamy próbę naprawy trwającą 10 minut (można powiedzieć - 10 tur), to mamy pewność, że naprawa się powiedzie. Jeżeli nie mamy aż tyle czasu i chcemy zaryzykować, to możemy podejmować krótsze próby naprawy - ale każda minuta odjęta od tego podstawowego czasu dziesięciu minut zmniejsza szanse powodzenia o 10% - więc jeśli podejmiemy próbę naprawy 5-minutową, to mamy tylko 50% szansy na to że się uda, a jeżeli spróbujemy naprawić w minutę, to szansa na powodzenie wynosi tylko 10%.
 
 Chodziło mi ostatnio po głowie pytanie, czy któraś _strategia naprawy_ (czyli naprawianie zawsze przez 10 minut, albo zawsze tylko przez minutę itd.) opłaca się bardziej od innych. Jakoś nie byłem w stanie znaleźć konkretnych wzorów matematycznych na takie sumowanie prawdopodbieństwa, więc po prostu napisałem skrypt, który zasymuluje tę sytuację i poda uśrednione wyniki:
 
@@ -69,23 +69,25 @@ export const CompareRepairingStrategies = () => {
 };
 ```
 
-Łatwiej było mi myśleć o tym jako o serii kroków niż o wszystkim naraz, więc napisałem kod podzielony na funkcje które wywołują siebie nawzajem - to jest przykład prostego programowania proceduralnego.
+Łatwiej było mi myśleć o tym jako o serii kroków niż o wszystkim naraz, więc napisałem kod podzielony na funkcje które wywołują siebie nawzajem - to jest przykład prostego programowania proceduralnego. Na diagramie poniżej widać jak funkcje wywołują siebie nawzajem i przekazują sobie dane:
+
+![Code diagram](/media/november-diagram.png "Code diagram")
+
+I w konsoli pojawił się wynik - każda strategia jest tak samo opłacalna. Jeżeli będziemy robili naprawy trwające jedną minutę, ale mające 10% szans powodzenia, to średnio będzie nam to zajmowało i tak 10 minut. Tutaj jest screen z konsoli REPL z wynikami:
 
 ![screenshot with test results](/media/repl.png "test results")
 
-Rzeczywiście, każda strategia jest tak samo opłacalna. Przy strategii robienia napraw za jedną minutę jest szansa, że uda nam się skończyć szybciej niż w 10 minut, ale ta szansa wyrównuje się z ryzykiem tego, że po podjęciu dziesięciu lub więcej prób nadal będziemy w punkcie wyjścia.
+Chociaż, w grze planszowej jest jeszcze taka możliwość, żeby użyć do naprawy narzędzia (jeżeli się je posiada w ekwipunku) - wtedy szansa na powodzenie naprawy zwiększa się o 40% - a więc jednominutowa naprawa ma 50% szans na powodzenie, a 6 minut wystarczy, żeby mieć pewność że się uda.
 
-Chociaż, w grze planszowej jest jeszcze taka możliwość, żeby użyć do naprawy narzędzia (jeżeli się go posiada) - wtedy szansa na powodzenie naprawy zwiększa się o 40% - a więc jednominutowa naprawa ma 50% szans na powodzenie, a 6 minut wystarczy, żeby mieć pewność że się uda.
-
-Dobra, tylko żeby zmodyfikować mój skrypt tak, żeby można było w parametrach wejściowych podawać informację o tym, czy posiadamy narzędzie czy nie, to musiałbym zmodyfikować kod w prawie każdej funkcji, wszędzie powstawiać if'y które zmieniają wykonywanie zależnie od tego którą funkcjonalnośc realizujemy, dodać dużo boilerplate'u (tzw. prop drilling).
+Też chciałbym to sprawdzić, ale żeby zmodyfikować mój skrypt tak, żeby można było w parametrach wejściowych podawać informację o tym, czy posiadamy narzędzie czy nie, to musiałbym zmodyfikować kod w prawie każdej funkcji, wszędzie powstawiać if'y które zmieniają wykonywanie zależnie od tego którą funkcjonalnośc realizujemy, dodać dużo boilerplate'u (np. argument drilling).
 
 To nie jest kod który można łatwo rozwijać.
 
 > ### Object oriented programming
 >
-> Wiele osób jest przekonanych, że jedynym sposobem na sprawienie, że program komputerowy będzie łatwy w utrzymaniu, który będzie można sprawnie rozszerzać o nowe funkcje jest programowanie obiektowe. Rzeczywiście można to osiągnąć za pomocą narzędzi dostępnych w obiektowych językach programowania, ale wiązałoby się to z ogromną ilością 'boilerplate code' którą obiektowe wzorce wymuszają. W programowaniu obiektowym nie da się uciec od wielu sztywnych i bezproduktywnych reguł, które są dogmatycznie wyznawane, wymuszane przez język programowania, a w prawdziwym świecie niepotrzebnych - takich jak np. 'wszystko musi być obiektem pewnej klasy'.
+> Wiele osób jest przekonanych, że jedynym sposobem na sprawienie, że program komputerowy będzie "na poważnym poziomie" jest programowanie obiektowe.
 >
-> Programowanie obiektowe jest faktycznie w rozwoju programisty krokiem w dobrą stronę po najprostszym programowaniu proceduralnym, ale chciałbym pokazać przykład, że można osiągnąć tak samo elastyczny i łatwy w utrzymaniu kod źródłowy bez uwiązywania się do całego pakietu zasad, wzorców i boilerplate code'u który jest wymagany w programowaniu obiektowym.
+> Programowanie obiektowe jest faktycznie w trakcie nauki programowania krokiem w dobrą stronę po najprostszym programowaniu proceduralnym, ale wcale nie jest jedynym i uniwersalnym sposobem programowania. Z każdym problemem można sobie spokojnie poradzić bez sięgania po programowanie obiektowe, czego przykład będzie można zobaczyć w tym artykule.
 
 ### Oddzielaj od siebie rzeczy, które zmieniają się z osobnych powodów
 
@@ -100,17 +102,19 @@ Bardzo wartościowym kryterium jest oddzielanie kawałków kodu które mówią '
 - **Co?** - "Chcę porównać średni czas trwania wykonywania kilku różnych strategii naprawy"
 - **W jaki sposób** - "Porównanie średnich czasów naprawy robi się tak - wykonamy 500 razy symulację naprawiania wg każdej ze strategii, następnie zsumujemy ich czasy trwania i podzielimy przez 500...", "Symulację strategii robi się tak - w pętli while dodajemy czas trwania naprawy do akumulatora i robimy test na to czy naprawa się powiodła..."
 
-To, czego akurat chcesz się dowiedzieć będzie zmieniało się zależnie od twojego widzimisię - dzisiaj jest to znalezienie najlepszej strategii naprawiania, jutro może być np. znalezienie najlepszej strategii poruszania się po statku. To, w jaki dokładnie sposób możemy określić najlepszą strategię będzie zmieniać się rzadziej (np. gdy wydawnictwo wyda dodatek do gry planszowej i w naprawianiu zacznie liczyć się jeszcze coś innego niż sam czas trwania).
+Nowe rzeczy których chcę się dowiedzieć będą pojawiały się często - dzisiaj jest to znalezienie najlepszej strategii naprawiania, jutro może być np. znalezienie najlepszej strategii poruszania się po statku. Konkretne kawałki programu, które np. symulują próbę naprawy statku będą zmieniać się rzadziej (np. trzeba będzie to zmienić gdy wydawnictwo wyda dodatek do gry planszowej i zmodyfikuje zasady).
 
-A to, w jaki sposób oblicza się średnią wartość dla zbioru liczb - nie będzie się zmieniać nigdy, a pewnie będzie wykorzystywane w wielu miejscach w twoim programie.
+A to, w jaki sposób oblicza się średnią wartość dla zbioru liczb - nie będzie się zmieniać nigdy, a pewnie będzie wykorzystywane w wielu miejscach w moim programie.
 
-Dzięki temu, gdy będziesz chciał np. zmienić kolejność dwóch kroków w tym co chcesz osiągnąć, to zmienisz tylko dwie linijki kodu, bez potrzeby każdorazowego wracania do szczegółów tych kroków żeby sprawdzić czy tam też nie musisz czegoś zamienić.
+Dzięki temu, gdy będę chciał np. zmienić kolejność dwóch kroków w tym co chcę osiągnąć, to zmienię tylko dwie linijki kodu, bez potrzeby każdorazowego wracania do szczegółów tych kroków żeby sprawdzić czy tam też nie musisz czegoś zamienić.
 
 To też da możliwość _programiście który w przyszłości będzie czytał twój kod_ żeby zawsze móc sobie powiedzieć "Ok, widzę co jest tutaj uzyskiwane, ale szukam czegoś innego - idę szukać dalej". Bez tego rozdzielenia programista będzie musiał przeczytać o tym co uzyskujesz, przeczytać w jaki sposób to uzyskujesz i wtedy dopiero będzie mógł przejść dalej. Taki kod dużo trudniej zrozumieć, bo trzeba zrozumieć wszystko jednocześnie.
 
-Jeśli dojdziesz do takiego momentu, że w twoim kodzie źródłowym jest wydzielona osobna, rozbudowana część, która zawiera wyłącznie kod opisujący efekt końcowy który ma być osiągnięty, a inna część programu (najczęściej nazywana silnikiem) zajmuje się samodzielnie doprowadzeniem do tego wymaganego stanu - wtedy to nazywa się programowanie deklaratywne.
+Czasem słyszy się określenie "Programowanie deklaratywne" żeby opisać taką sytuację, w któ©ej w twoim kodzie źródłowym jest wydzielona osobna, rozbudowana część, która zawiera wyłącznie kod opisujący efekt końcowy który ma być osiągnięty, a inna część programu (np. nazywana silnikiem) zajmuje się samodzielnie doprowadzeniem do wymaganego stanu.
 
 ### Wzorzec Komponent - Kompozycja
+
+Żeby więc uniknąć problemów które niesie ze sobą programowanie proceduralne, sięgnijmy po wzorzec, który rozwiązuje problem na który natrafiliśmy. Zróbmy refactoring kodu:
 
 ```ts
 import { createStatisticalAnalysisOfSamples } from "./mathTestUtils";
@@ -127,17 +131,18 @@ type CreateSingleStrategyExecutionArgs = {
 };
 
 // create a function that executes a strategy - repair trials in a sequence until success and returns accumulated time elapsed in minutes
-export const createSingleStrategyExecution =
-  ({ repairTrial, trialDuration }: CreateSingleStrategyExecutionArgs) =>
-  () => {
-    let minutesElapsed = 0;
-    while (true) {
-      const repaired = repairTrial();
-      minutesElapsed += trialDuration;
-      if (repaired) break;
-    }
-    return minutesElapsed;
-  };
+export const createSingleStrategyExecution = ({
+  repairTrial,
+  trialDuration,
+}: CreateSingleStrategyExecutionArgs) => () => {
+  let minutesElapsed = 0;
+  while (true) {
+    const repaired = repairTrial();
+    minutesElapsed += trialDuration;
+    if (repaired) break;
+  }
+  return minutesElapsed;
+};
 
 export type TestEnvironment = {
   maxRepairingTime: number;
@@ -165,36 +170,36 @@ export const CompareRepairingStrategies = ({
 };
 ```
 
-Żeby więc uniknąć problemów które niesie ze sobą programowanie proceduralne, a nie musieć sięgać po cały bagaż który niesie ze sobą programowanie obiektowe, sięgnijmy po wzorzec, który rozwiązuje nam problem na który natrafiliśmy - i nic więcej.
+Przez zmianę funkcji z mojego skryptu w taki sposób, żeby wszystkie funkcje których używają w środku były im przekazywane jako argumenty, uzyskałem możliwość 'wymieniania' pojedynczych funkcji w przyszłości, pomimo że data flow i typy danych przekazywanych pomiędzy nimi się nie zmieniły. Najważniejsze zmiania w kodzie źródłowym polega na tym, że wszystkie decyzje o tym jaką konkretnie implementację wybierzemy dla każdej z funkcji zapadają w jednym miejscu - w funkcji najbardziej zewnętrznej, która staje się naszą "kompozycją". Pojedyncze funkcje które są definiowane w niej stają się "komponentami".
 
-Żeby rozdzielić 'co' od 'w jaki sposób' w moim kodzie podzieliłem go na 'komponenty' i 'kompozycje'. Komponent to pojedynczy kawałek kodu który może być składany z innymi (przez argumenty wejściowe i zwracaną wartość), a kompozycja to miejsce w którym składam te komponenty ze sobą. Dzięki temu każdy komponent może być pisany i czytany bez konieczności czytania o tym co dzieje się w innych, a cała współpraca między nimi jest zgrupowana w jednym miejscu - kompozycji.
+![Code diagram](/media/november-diagram-2.png "Code diagram")
 
-W przypadku naszego języka programowania komponent to po prostu czysta funkcja (taka która operuje tylko na argumentach z którymi została wywołana i wszystko co robi to zwraca wynik), a kompozycja to funkcja, która wywoła wszystkie te komponenty łącząc je ze sobą - złoży je w jeden ciąg operacji.
+Żeby rozdzielić 'co' od 'w jaki sposób' w moim kodzie podzieliłem go na 'komponenty' i 'kompozycje'. Komponent to pojedynczy kawałek kodu który może być składany z innymi (przez argumenty wejściowe i zwracaną wartość), a kompozycja to miejsce w którym składam te komponenty ze sobą. Dzięki temu każdy komponent może być pisany i czytany bez konieczności czytania o tym co dzieje się w innych, a całe podejmowanie decyzji na temat tego jaką implementację wybierzemy dla poszczególnych z nich jest zgrupowana w jednym miejscu - kompozycji.
+
+W przypadku naszego języka programowania komponent to po prostu czysta funkcja (taka która operuje tylko na argumentach z którymi została wywołana i wszystko co robi to zwraca wynik), a kompozycja to funkcja, która utworzy 'docelowe' komponenty i złączy je ze sobą.
 
 Dodanie jakiejkolwiek nowej funkcjonalności do tego programu - na jakimkolwiek poziomie by nie była, od mechanizmu obliczania średniej wartości, czy symulowania rzutu kostką, aż po symulowanie strategii - **zmiana nie będzie już polegała na modyfikacji istniejących szczegółów implementacyjnych, tylko na napisaniu nowej kompozycji która opisze 'co chcemy osiągnąć' w nowej funkcjonalności i ewentualnie napisaniu nowego komponentu jeżeli obecne nie wystarczą żeby to osiągnąć.**
 
-W moim skrypcie wygląda to w ten sposób:
+W moim skrypcie będzie wyglądać to w ten sposób:
 
 ```ts
 // new component
-export const createSingleStrategyExecutionWithTool =
-  ({
-    repairTrial,
-    repairTrialWithTool,
-    trialDuration,
-  }: CreateSingleStrategyExecutionWithToolArgs) =>
-  () => {
-    let minutesElapsed = 0;
-    let toolAvailable = true;
-    while (true) {
-      const repaired = toolAvailable ? repairTrialWithTool() : repairTrial();
-      // tool is always single-use
-      toolAvailable = false;
-      minutesElapsed += trialDuration;
-      if (repaired) break;
-    }
-    return minutesElapsed;
-  };
+export const createSingleStrategyExecutionWithTool = ({
+  repairTrial,
+  repairTrialWithTool,
+  trialDuration,
+}: CreateSingleStrategyExecutionWithToolArgs) => () => {
+  let minutesElapsed = 0;
+  let toolAvailable = true;
+  while (true) {
+    const repaired = toolAvailable ? repairTrialWithTool() : repairTrial();
+    // tool is always single-use
+    toolAvailable = false;
+    minutesElapsed += trialDuration;
+    if (repaired) break;
+  }
+  return minutesElapsed;
+};
 
 // new composition
 export const CompareRepairingStrategiesWithTool = ({
@@ -220,29 +225,41 @@ export const CompareRepairingStrategiesWithTool = ({
 };
 ```
 
-taki program czytającemu go programiście pozwala na przejrzyste czytanie go jednocześnie i pod kątem tego 'co chce uzyskać' jak i 'w jaki sposób jest to uzyskiwane'. Za całą odpowiedź na pytanie 'co chcę uzyskać' odpowiada jedno miejsce - kompozycja, a na pytania 'w jaki sposób' odpowiadają osobno komponenty. Dzięki temu każde zagadnienie można zrozumieć poprzez przeczytanie jednego spójnego kawałka kodu.
+Diagram pokazujący obok siebie dwie kompozycje które teraz będziemy mieć w kodzie:
+
+![Code diagram](/media/november-diagram-3.png "Code diagram")
+
+taki program czytającemu go programiście pozwala na przejrzyste czytanie go jednocześnie i pod kątem tego 'co chce uzyskać' jak i 'w jaki sposób jest to uzyskiwane'. Za całą odpowiedź na pytanie 'co chcę uzyskać' odpowiada jedno miejsce - kompozycja, a na pytania 'w jaki sposób' odpowiadają osobno komponenty. Dzięki temu każde zagadnienie można zrozumieć osobno poprzez przeczytanie jednego spójnego kawałka kodu.
 
 W pierwszym przykładzie ostateczny wynik zwracany był przez funkcję `CompareRepairingStrategies` - ona wywoływała `createSingleStrategyExecution`... itd. Żeby dowiedzieć się w jaki sposób działa testowanie pojedynczej strategii musieliśmy wejść do środka. I tak w kółko aż nie przeczytaliśmy całego programu od początku do końca. Taki program, po osiągnięciu pewnej długości kodu źródłowego nigdy nie da nam zrozumieć w 100% "Co chcemy uzyskać", bo nie wsadzimy całego długiego programu naraz do naszej pamięci.
 
-Z drugiej strony, informacja o tym 'w jaki sposób' też nie powinna być schowana za bardzo. W systemie komponent-kompozycja "w jaki sposób" jest oddalone tylko o jedno przejście do implementacji funkcji. Gdyby programista nie mógł w prosty sposób przejść do implementacji funkcji która jest używana w kompozycji, bo np. konfiguracja która ostatecznie o tym decyduje nie byłaby łatwo dostępna i zrozumiała, albo system powala na to, żeby w trakcie działania programu wykonywało się w danym kawałku kodu zbyt wiele różnych możliwości, to nawigowanie po kodzie też nie będzie możliwe.
+Z drugiej strony, informacja o tym 'w jaki sposób' też nie powinna być schowana za bardzo. W systemie komponent-kompozycja "w jaki sposób" jest oddalone tylko o jedno przejście do implementacji funkcji. Gdyby programista nie mógł w prosty sposób przejść do implementacji funkcji która jest używana w kompozycji, bo np. konfiguracja która ostatecznie o tym decyduje nie byłaby łatwo dostępna i zrozumiała, albo w trakcie działania programu może wykonać się w danym kawałku kodu zbyt wiele różnych możliwości, to nawigowanie po kodzie też nie będzie możliwe.
 
 ### Open-closed principle
 
 Właśnie dlatego mówi się, że elementy systemu powinny być otwarte na rozszerzenie, ale zamknięte na modyfikacje. Oznacza to, że można zmienić zachowanie systemu za pomocą samego dodawania nowego kodu źródłowego i zmiany kompozycji, bez modyfikowania istniejących już komponentów. Dzięki temu:
 
-- Unikamy potrzeby modyfikowania istniejącego kodu źródłowego, a co za tym idzie, trudności oraz ryzyka które z tym się wiążą - nie mamy wszystkich informacji które były znane w czasie kiedy kod był pisany, możemy wprowadzić regresję i bugi itd.
+- Unikamy potrzeby modyfikowania istniejącego kodu źródłowego, a co za tym idzie, trudności oraz ryzyka które z tym się wiążą - nie mamy wszystkich informacji które były znane w czasie kiedy kod był pisany, możemy wprowadzić regresję, bugi itd.
 
-- Możemy rozwijać aplikację w każdym wymiarze i dodawać dowolnie wiele wariantów działania na każdym poziomie systemu bez strachu, że zmiany będą trudne w zakodowaniu (bo trzeba było zrozumieć cały splątany system zanim się go zmodyfikuje), albo utrudnią utrzymywanie systemu w przyszłości (gdyby z czasem powstało za dużo rozgałęzień powsadzanych w każde miejsce systemu).
+- Możemy rozwijać aplikację w każdym wymiarze i dodawać dowolnie wiele wariantów działania na każdym poziomie systemu bez strachu, że zmiany będą trudne w zakodowaniu (bo nie trzeba zrozumieć całego splątanego systemu zanim się doda coś nowego), albo utrudnią utrzymywanie systemu w przyszłości (gdyby z czasem powstało za dużo rozgałęzień powsadzanych w każde miejsce systemu).
 
 - Kod źródłowy jest łatwiejszy do czytania i zrozumienia przez programistów.
 
 ### Czy przypadkiem nie czytałem już o tym gdzieś wcześniej?
 
-[Tak, prawdopodobnie.](https://overreacted.io/before-you-memo/)
+[Tak, prawdopodobnie.](https://overreacted.io/before-you-memo/#didnt-i-read-about-this-before)
 
-To nie jest nowy pomysł. React (framework frontendowy) opiera się na tych samych zasadach i to jest to co powoduje że tak dobrze mi się w nim pracuje.
+To nie jest nowy pomysł. React (framework frontendowy) opiera się na tych samych zasadach i to jest to co powoduje że tak dobrze się w nim pracuje.
 
-Dodatkowo - programowanie funkcyjne korzysta z wielu narzędzi które zwiększają komfort programisty w tworzeniu kompozycji - poprzez korzystanie ze struktur matematycznych które pozwalają zrozumieć, a nawet dać gwarancję co do tego jak będzie się zachowywał dany komponent, jak dane komponenty będą do siebie pasować, jak będzie przekazywany stan pomiędzy nimi, jak ułatwić pracę z obszernym i skomplikowanym stanem itd. Na każde wyzwanie "Dobrze, ale jak to będzie działało w dużym programie pod kątem X" istnieją narzędzia które starają się uprościć pracę w skali.
+![React components](/media/react.png "React Components")
+
+W react'cie komponenty też mogą być kompozycjami i posiadać 'w środku' inne komponenty. Bez transpilacji JSX (trójkątnych nawiasów na powyższym screenie) reactowy kod źródłowy wyglądałby praktycznie tak samo jak kod źródłowy z moich przykładów.
+
+### Czy da się to jeszcze poprawić?
+
+To mimo wszystko nadal jest prosty skrypt jednorazowego użytku. Kod źródłowy w dużych aplikacjach nie będzie tak wyglądał, będzie miał więcej standaryzacji, prawdopodobnie jakiś bardziej rozbudowany mechanizm do zarządzania tym jakich komponentów możemy używać. Gdyby dziedzina była bardziej rozbudowana pod względem przekształcania danych, możnaby ten przykład też zmienić, na przykład zmieniając funkcje komponentów w taki sposób, żeby przyjmowały i zwracały wyłącznie proste dane, a data flow (przekazywanie danych od jednego komponentu do drugiego) odbywałby się całkowicie w kodzie źródłowym kompozycji.
+
+Dodatkowo - programowanie funkcyjne korzysta z wielu narzędzi, które zwiększają komfort programisty w tworzeniu kompozycji - poprzez korzystanie ze struktur matematycznych które pozwalają zrozumieć, a nawet dać gwarancję co do tego jak będzie się zachowywał dany komponent, jak dane komponenty będą do siebie pasować, jak będzie przekazywany stan pomiędzy nimi, jak ułatwić pracę z obszernym i skomplikowanym stanem itd. Na każde wyzwanie "Dobrze, ale jak to będzie działało w dużym programie pod kątem X" istnieją narzędzia które starają się uprościć pracę w skali. Takie jak React.
 
 pozdrawiam,<br />
 ~Marek
