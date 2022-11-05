@@ -1,0 +1,31 @@
+---
+title: Platform developer (Polish)
+date: "2022-11-05T00:00:00.000Z"
+template: "post"
+draft: false
+slug: "platform-developer-pl"
+category: " "
+tags:
+  - "programming"
+description: "Jak nieaktualne przekonania na temat technologii webowych hamują rozwój zespołów programistycznych."
+socialImage: "/media/image-18.png"
+---
+
+Cześć,
+
+Podział na programistów frontendowych, backendowych i project managerów jest umowny i powoli przestaje pasować do rzeczywistości technicznej, która nas otacza. Aplikacje niekoniecznie muszą się składać z części frontendowej i backendowej, które komunikują się przez REST API. Powstają inne architektury bez tego podziału i to umożliwia nam też inną organizację pracy.
+
+Z mojego doświadczenia w różnych organizacjach widzę że ten podział na role backendowe i frontendowe powoduje problemy. jednym z objawów jest na przykład to, że nie da się jasno ustalić, kto jest osobą do kontaktu i jest w stanie naprawdę zobowiązać się do tego, żeby dana funkcjonalność dobrze działała. Jak szef przychodził i pytał "dlaczego formularz preferencji użytkownika nie działa", to backendowcy mówili "my tylko robimy zadania z backendu, nie mamy wpływu na to jak to się wyświetla", frontendowcy mówili "my tylko robimy zadania z frontendu, nie mamy wpływu na to, jak te dane się zapisują", a project manager mówił "ja to nie mam wpływu ani na jedno ani na drugie, ja tylko rozmawiam z klientem i zapisuję to w zadaniach na JIRA". I wszystkie trzy osoby mają rację, bo wybrali technologię i podział ról, które nie pozwalają żadnej osobie zrozumieć jak działa funkcjonalność od początku do końca. Wymyślenie pozycji fulstacka jest jakąś próbą ucieczki od tego problemu, ale nieskuteczną, bo zamiast wprowadzić nowy, lepszy podział odpowiedzialności, tylko oznajmia "teraz każdy jest odpowiedzialny za wszystko, bo mamy jeden język programowania - i po kłopocie". To ma prawo się sprawdzić co najwyżej w małych projektach, ale nie ma opcji żeby każdy się znał na wszystkim, ludzie z jakiegoś powodu się specjalizują i nie piszą na swoich CV “Mogę zrobić wszystko o co mnie poprosicie, nie robi mi to różnicy”
+
+Na szczęście _da się_ wprowadzić inny podział ról - taki, który będzie bardziej odwzorowywał rzeczywistość. Na _Product Developera_ i na _Platform Developera_.
+
+Jeżeli wybierzemy taki stack technologiczny, w którym jeden programista rzeczywiście jest w stanie wdrożyć konkretny feature od początku do końca (na przykład formularz z preferencjami użytkownika), to możemy stworzyć nową rolę, właśnie takiego _Product Developera_. Product Developer jest w stanie porozmawiać z klientem bez głuchego telefonu, ustalić z nim wspólną wersję co do tego jak konkretna funkcjonalność ma działać, potem usiąść, zaimplementować ją w aplikacji i upewnić się, że będzie poprawnie działała. Dzięki temu w końcu ktoś może realnie powiedzieć szefowi "ok, zobowiązuję się że dodam to do aplikacji i że będzie działać". I może się wyspecjalizować w tych umiejętnościach, które są konkretnie potrzebne do implementowania feature'ów - komunikacji z klientem, specyfikowania, zaprogramowania feature'a w zewnętrznej warstwie aplikacji i weryfikacji czy rzeczywiście dobrze działa. To nie znaczy, że jest fullstackiem i potrafi sam zrobić **wszystko** - bo jak ktoś próbuje nauczyć się wszystkiego po trochu, to nie będzie miał czasu nauczyć się jednej rzeczy porządnie. Dlatego Product Developer będzie potrzebował Platform Developera, który dostarczy mu narzędzia i wewnętrzną strukturę, które umożliwią mu tę samodzielną pracę nad feature'ami. W trakcie gdy Product Developer będzie robił coraz bardziej złożone funkcjonalności (gdy zrobi już wszystkie formularze i będzie musiał zacząć robić czat dla użytkowników aplikacji), Platform Developer będzie dostarczał mu bardziej rozwinięte i indywidualnie dopasowane narzędzia i architekturę pod spodem, żeby tamten był w stanie zrobić nowe, bardziej złożone funkcjonalności.
+
+Dlatego też tak dużo firm korzysta z rozwiązań platform-as-a-service - jeżeli jakiś product developer nie ma w swojej organizacji platform developera i nie jest zainteresowany uczeniem się np. która metoda szyfrowania jest najlepsza do przechowywania haseł, to do pewnego stopnia może zastąpić swojego platform developera takimi rozwiązaniami PaaS.
+
+Kiedyś ta granica rzeczywiście rysowała się mniej więcej na podziale pomiędzy przeglądarką a serwerem, ale od dawna już tak nie jest. Wielu programistów do dziś się nie zorientowało, że te czasy już minęły. Dosłownie, dostawałem takie rady od znajomych - "Nie zostawaj frontendowcem, bo to nie wymaga żadnych umiejętności i przez to jako frontendowiec zawsze będziesz zarabiał mniej niż backendowiec".
+
+A prawda jest taka, że zarówno “backendowca” jak i “frontendowca” da się zautomatyzować, bo to są sztuczne stanowiska - ich nazwy wzięły się od pojedynczej technologii. Jeśli wyeliminujemy te niepotrzebne role i sztuczną pracę jaką to generuje, będziemy mogli skupić się na robieniu kodu, który rozwiązuje _realne_ problemy. A realne problemy zawsze będą takie: “Jakie funkcjonalności trzeba zrobić” i “Jakiego systemu-platformy potrzebujemy, żeby _product developer_ mógł je dowieźć”.
+
+pozdrawiam,<br />
+~Marek
